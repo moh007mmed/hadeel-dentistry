@@ -3,38 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hadeel Dental Hub | عالم هديل لطب الأسنان</title>
-    <!-- استدعاء خط فريد وحديث من جوجل -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Hadeel Ahmed | Dental Excellence - Batch 8</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&display=swap" rel="stylesheet">
     
     <style>
-        /* إعدادات التصميم العامة */
+        :root {
+            --primary: #0ea5e9;
+            --primary-glow: rgba(14, 165, 233, 0.15);
+            --bg-dark: #090d16;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Cairo', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: #f8fafc;
-            color: #1e293b;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* شريط التنقل (Navigation Bar) */
+        /* خلفية سينمائية متحركة */
+        .bg-glows {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .glow-1 {
+            position: absolute;
+            top: -20%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
+            animation: floatGlow 12s infinite alternate ease-in-out;
+        }
+
+        .glow-2 {
+            position: absolute;
+            bottom: -10%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+            animation: floatGlow 8s infinite alternate-reverse ease-in-out;
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 40px) scale(1.2); }
+        }
+
+        /* شريط تنقل ذكي ومتجاوب */
         header {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(9, 13, 22, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px border var(--card-border);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -43,139 +92,332 @@
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: #0f172a;
-            letter-spacing: 1px;
+            font-size: 22px;
+            font-weight: 900;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .logo span {
-            color: #0ea5e9; /* لمسة فيروزية */
+            color: var(--primary);
+            background: linear-gradient(45deg, #0ea5e9, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .batch-badge {
+            font-size: 11px;
+            background: rgba(14, 165, 233, 0.2);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-weight: 500;
         }
 
         .nav-links {
             list-style: none;
             display: flex;
-            gap: 30px;
+            gap: 35px;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #475569;
-            font-weight: 400;
-            transition: color 0.3s ease;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
         }
 
         .nav-links a:hover, .nav-links a.active {
-            color: #0ea5e9;
-            font-weight: 700;
+            color: #fff;
         }
 
-        /* الواجهة الرئيسية (Hero Section) */
+        /* واجهة الـ Hero المستقبلية */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
-            padding-top: 80px;
-            position: relative;
+            padding: 120px 20px 60px 20px;
+            max-width: 1300px;
+            margin: 0 auto;
         }
 
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            padding: 20px;
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 60px;
+            align-items: center;
+            width: 100%;
+        }
+
+        .hero-text {
+            text-align: right;
         }
 
         .hero-tag {
-            background-color: rgba(14, 165, 233, 0.1);
-            color: #0ea5e9;
-            padding: 6px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: #fff;
+            padding: 8px 18px;
             border-radius: 50px;
             font-size: 14px;
-            display: inline-block;
-            margin-bottom: 20px;
-            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(5px);
+        }
+
+        .hero-tag .dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #22c55e;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.9); opacity: 0.7; }
         }
 
         .hero h1 {
-            font-size: 48px;
-            color: #0f172a;
-            line-height: 1.4;
-            margin-bottom: 24px;
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
             font-size: 18px;
-            color: #475569;
-            margin-bottom: 40px;
+            color: var(--text-muted);
             line-height: 1.8;
+            margin-bottom: 40px;
+            max-width: 700px;
         }
 
-        /* الأزرار الفخمة */
-        .cta-btn {
-            display: inline-block;
-            padding: 14px 32px;
-            background-color: #0f172a;
-            color: #ffffff;
+        .cta-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-premium {
+            padding: 16px 36px;
+            background: linear-gradient(135deg, #0ea5e9 0%, #4f46e5 100%);
+            color: #fff;
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: 700;
-            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .cta-btn:hover {
-            background-color: #0ea5e9;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.3);
-        }
-
-        /* قسم الميزات السريع */
-        .quick-features {
-            max-width: 1200px;
-            margin: -60px auto 60px auto;
-            position: relative;
-            z-index: 10;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 0 20px;
-        }
-
-        .feature-card {
-            background: #ffffff;
-            padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            font-weight: 700;
+            box-shadow: 0 4px 20px rgba(14, 165, 233, 0.3);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(14, 165, 233, 0.5);
+        }
+
+        /* العنصر ثلاثي الأبعاد التفاعلي الصامت في الجانب */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .interactive-3d-card {
+            width: 320px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+
+        /* أيقونة مجسمة تطفو بداخل الكارت */
+        .tooth-icon-3d {
+            font-size: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 10px 20px rgba(14, 165, 233, 0.4));
+            transform: translateZ(50px);
+            animation: floating 4s infinite ease-in-out;
+        }
+
+        @keyframes floating {
+            0% { transform: translateZ(50px) translateY(0px); }
+            50% { transform: translateZ(50px) translateY(-15px); }
+            100% { transform: translateZ(50px) translateY(0px); }
+        }
+
+        .interactive-3d-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #fff;
+            transform: translateZ(30px);
+            margin-bottom: 10px;
+        }
+
+        .interactive-3d-card p {
+            font-size: 14px;
+            color: var(--text-muted);
             text-align: center;
-            transition: transform 0.3s ease;
+            transform: translateZ(20px);
         }
 
-        .feature-card:hover {
-            transform: translateY(-5px);
+        /* قسم الميزات الحركية ثلاثية الأبعاد */
+        .features-section {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 80px 20px;
         }
 
-        .feature-card h3 {
-            color: #0f172a;
-            margin-bottom: 12px;
-            font-size: 20px;
+        .grid-3d {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
 
-        .feature-card p {
-            color: #64748b;
+        .card-3d {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 40px 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card-3d:hover {
+            border-color: rgba(14, 165, 233, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-3d .icon {
+            font-size: 40px;
+            margin-bottom: 25px;
+            transform: translateZ(40px);
+            display: inline-block;
+        }
+
+        .card-3d h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #fff;
+            transform: translateZ(30px);
+        }
+
+        .card-3d p {
+            color: var(--text-muted);
             font-size: 15px;
-            line-height: 1.6;
+            line-height: 1.7;
+            transform: translateZ(20px);
+        }
+
+        /* التجاوب التام مع الهواتف (Responsive Design) */
+        @media (max-width: 968px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+                text-align: center;
+            }
+            .hero-text {
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .cta-group {
+                justify-content: center;
+            }
+            .hero-visual {
+                order: -1; /* رفع الكارت التفاعلي للأعلى في الموبايل ليعطي شكلاً رائعاً */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            .nav-links {
+                gap: 20px;
+                width: 100%;
+                justify-content: center;
+                background: rgba(255, 255, 255, 0.03);
+                padding: 10px;
+                border-radius: 10px;
+                border: 1px solid var(--card-border);
+            }
+            .nav-links a {
+                font-size: 14px;
+            }
+            .interactive-3d-card {
+                width: 280px;
+                height: 350px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- شريط التنقل -->
+    <div class="bg-glows">
+        <div class="glow-1"></div>
+        <div class="glow-2"></div>
+    </div>
+
     <header>
         <div class="nav-container">
-            <div class="logo">هديل <span>أحمد</span></div>
+            <a href="#" class="logo">
+                هديل أحمد <span>بله</span>
+                <span class="batch-badge">Batch 8</span>
+            </a>
             <ul class="nav-links">
                 <li><a href="#" class="active">الرئيسية</a></li>
                 <li><a href="#">عن هديل</a></li>
@@ -185,31 +427,84 @@
         </div>
     </header>
 
-    <!-- الواجهة الترحيبية -->
     <section class="hero">
-        <div class="hero-content">
-            <span class="hero-tag">شغف، إبداع، وتميز في طب الأسنان</span>
-            <h1>مرحباً بكم في عالم هديل لطب الأسنان الفاخر</h1>
-            <p>منصة رقمية تجمع بين الفن الطبي والمعرفة الحديثة لنشر الوعي وصناعة الابتسامة المثالية. استكشفوا معنا أحدث ما توصل إليه علم تجميل وطب الأسنان.</p>
-            <a href="#" class="cta-btn">ابدأ الرحلة معنا</a>
+        <div class="hero-grid">
+            
+            <div class="hero-text">
+                <div class="hero-tag">
+                    <div class="dot"></div>
+                    منصة جيل طب الأسنان الجديد المتميز
+                </div>
+                <h1>مستقبل طب الأسنان برؤية <span>هديل أحمد بله</span></h1>
+                <p>مرحباً بكم في الفضاء الرقمي الخاص بالدكتورة هديل أحمد (Batch 8). ندمج هنا بين رصانة العلم الطبي الحديث، وفن تجميل الأسنان الفاخر لنصنع ابتسامة تحاكي المستقبل.</p>
+                <div class="cta-group">
+                    <a href="#" class="btn-premium">استكشف عالم هديل</a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="interactive-3d-card elements-3d">
+                    <div class="tooth-icon-3d">🦷</div>
+                    <h3>Batch 8 Dentistry</h3>
+                    <p>حرك الماوس أو المس الكرت ليتفاعل معك بالأبعاد الثلاثية</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
-    <!-- بطاقات تعريفية سريعة -->
-    <section class="quick-features">
-        <div class="feature-card">
-            <h3>🦷 معلومات طبية موثوقة</h3>
-            <p>تبسيط مفاهيم طب الأسنان ونشر النصائح اليومية لابتسامة أكثر صحة وإشراقاً.</p>
-        </div>
-        <div class="feature-card">
-            <h3>✨ لمسة تجميلية عصرية</h3>
-            <p>مواكبة أحدث التقنيات والمستجدات في عالم تجميل الأسنان وفن صناعة الابتسامة.</p>
-        </div>
-        <div class="feature-card">
-            <h3>رؤية مستقبلية</h3>
-            <p>شغف حقيقي يطمح لترك بصمة مميزة في مجتمع طب الأسنان العربي والعالمي.</p>
+    <section class="features-section">
+        <div class="grid-3d">
+            
+            <div class="card-3d elements-3d">
+                <div class="icon">✨</div>
+                <h3>فلسفة الابتسامة</h3>
+                <p>الأسنان ليست مجرد علاج طبي، بل هي هندسة جمالية وثقة تصنع شخصية الإنسان ونقودها بشغف الدفعة الثامنة.</p>
+            </div>
+
+            <div class="card-3d elements-3d">
+                <div class="icon">🔬</div>
+                <h3>أبحاث ومستجدات</h3>
+                <p>مواكبة دورية لأحدث تكنولوجيا زراعة وتقويم وتجميل الأسنان الرقمي ونقلها بأسلوب تفاعلي راقٍ.</p>
+            </div>
+
+            <div class="card-3d elements-3d">
+                <div class="icon">💡</div>
+                <h3>توجيه وبصمة</h3>
+                <p>منصة تهدف لترك أثر حقيقي في المجتمع الطبي ونشر ثقافة الحفاظ على الابتسامات السليمة.</p>
+            </div>
+
         </div>
     </section>
 
+    <script>
+        const cards = document.querySelectorAll('.elements-3d');
+        
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const xc = rect.width / 2;
+                const yc = rect.height / 2;
+                
+                // حساب زاوية الميلان بناءً على موقع الفأرة
+                const angleX = (yc - y) / 10; 
+                const angleY = (x - xc) / 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                card.style.transition = 'all 0.5s ease';
+            });
+
+            card.addEventListener('mouseenter', () => {
+                card.style.transition = 'none';
+            });
+        });
+    </script>
 </body>
 </html>
