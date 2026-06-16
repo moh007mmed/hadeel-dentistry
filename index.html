@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hadeel Dental Hub | عالم هديل لطب الأسنان</title>
+    <!-- استدعاء خط فريد وحديث من جوجل -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* إعدادات التصميم العامة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+
+        /* شريط التنقل (Navigation Bar) */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0f172a;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #0ea5e9; /* لمسة فيروزية */
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #475569;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #0ea5e9;
+            font-weight: 700;
+        }
+
+        /* الواجهة الرئيسية (Hero Section) */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+            padding-top: 80px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero-tag {
+            background-color: rgba(14, 165, 233, 0.1);
+            color: #0ea5e9;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: #0f172a;
+            line-height: 1.4;
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #475569;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        /* الأزرار الفخمة */
+        .cta-btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background-color: #0f172a;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background-color: #0ea5e9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(14, 165, 233, 0.3);
+        }
+
+        /* قسم الميزات السريع */
+        .quick-features {
+            max-width: 1200px;
+            margin: -60px auto 60px auto;
+            position: relative;
+            z-index: 10;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: #0f172a;
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+
+        .feature-card p {
+            color: #64748b;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط التنقل -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">هديل <span>أحمد</span></div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">الرئيسية</a></li>
+                <li><a href="#">عن هديل</a></li>
+                <li><a href="#">أسرار الأسنان</a></li>
+                <li><a href="#">تواصل معنا</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- الواجهة الترحيبية -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-tag">شغف، إبداع، وتميز في طب الأسنان</span>
+            <h1>مرحباً بكم في عالم هديل لطب الأسنان الفاخر</h1>
+            <p>منصة رقمية تجمع بين الفن الطبي والمعرفة الحديثة لنشر الوعي وصناعة الابتسامة المثالية. استكشفوا معنا أحدث ما توصل إليه علم تجميل وطب الأسنان.</p>
+            <a href="#" class="cta-btn">ابدأ الرحلة معنا</a>
+        </div>
+    </section>
+
+    <!-- بطاقات تعريفية سريعة -->
+    <section class="quick-features">
+        <div class="feature-card">
+            <h3>🦷 معلومات طبية موثوقة</h3>
+            <p>تبسيط مفاهيم طب الأسنان ونشر النصائح اليومية لابتسامة أكثر صحة وإشراقاً.</p>
+        </div>
+        <div class="feature-card">
+            <h3>✨ لمسة تجميلية عصرية</h3>
+            <p>مواكبة أحدث التقنيات والمستجدات في عالم تجميل الأسنان وفن صناعة الابتسامة.</p>
+        </div>
+        <div class="feature-card">
+            <h3>رؤية مستقبلية</h3>
+            <p>شغف حقيقي يطمح لترك بصمة مميزة في مجتمع طب الأسنان العربي والعالمي.</p>
+        </div>
+    </section>
+
+</body>
+</html>
