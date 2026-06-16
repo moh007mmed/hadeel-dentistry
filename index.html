@@ -31,6 +31,8 @@
             color: var(--text-light);
             overflow-x: hidden;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* خلفية الجسيمات السحرية */
@@ -173,7 +175,7 @@
             font-weight: 300;
         }
 
-        /* ---------------- أقسام المحتوى الجديدة ---------------- */
+        /* ---------------- أقسام المحتوى ---------------- */
         .content-section {
             padding: 100px 20px;
             max-width: 1200px;
@@ -203,7 +205,7 @@
             box-shadow: 0 0 10px var(--primary-glow);
         }
 
-        /* قسم رؤية هديل (اقتباس رئيسي) */
+        /* قسم رؤية هديل */
         .vision-box {
             background: var(--glass-bg);
             backdrop-filter: blur(15px);
@@ -293,7 +295,7 @@
             color: #e2e8f0 !important;
         }
 
-        /* فئة تأثير الظهور عند التمرير (Scroll Reveal) */
+        /* فئة تأثير الظهور عند التمرير */
         .reveal {
             opacity: 0;
             transform: translateY(50px);
@@ -303,6 +305,129 @@
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* ---------------- الفوتر الفخم المضاف حديثاً ---------------- */
+        .lux-footer {
+            margin-top: auto;
+            position: relative;
+            background: linear-gradient(to top, #00040a, transparent);
+            padding: 80px 20px 20px;
+            border-top: 1px solid rgba(0, 229, 255, 0.1);
+            z-index: 10;
+        }
+
+        /* الخط العلوي المضيء للفوتر */
+        .lux-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-glow), transparent);
+            box-shadow: 0 0 20px var(--primary-glow), 0 0 40px var(--secondary-glow);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            padding-bottom: 50px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-brand h2 {
+            font-size: 24px;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.8;
+            max-width: 300px;
+        }
+
+        .footer-links h3 {
+            font-size: 18px;
+            color: var(--primary-glow);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-links ul li a:hover {
+            color: #fff;
+            transform: translateX(-5px); /* حركة خفيفة لليسار عند التأشير */
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        /* زر العودة للأعلى */
+        .back-to-top {
+            position: absolute;
+            right: 40px;
+            top: -25px;
+            width: 50px;
+            height: 50px;
+            background: var(--bg-deep);
+            border: 1px solid var(--primary-glow);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--primary-glow);
+            text-decoration: none;
+            font-size: 24px;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 20;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-10px) scale(1.1);
+            background: var(--primary-glow);
+            color: var(--bg-deep);
+            box-shadow: 0 10px 25px rgba(0, 229, 255, 0.6);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .footer-bottom span {
+            color: var(--primary-glow);
+            font-weight: 700;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; text-shadow: 0 0 5px transparent; }
+            50% { opacity: 1; text-shadow: 0 0 15px var(--primary-glow); }
+            100% { opacity: 0.7; text-shadow: 0 0 5px transparent; }
         }
 
         /* الحركات الانتقالية */
@@ -330,6 +455,7 @@
             .nav-links { gap: 20px; justify-content: center; }
             .digital-tooth-container { width: 150px; height: 200px; }
             .vision-text { font-size: 22px; }
+            .back-to-top { right: 20px; top: -20px; width: 40px; height: 40px; font-size: 20px; }
         }
     </style>
 </head>
@@ -352,24 +478,20 @@
     </header>
 
     <!-- واجهة التحليق الرئيسية -->
-    <section class="hero">
+    <section class="hero" id="top">
         <!-- السن الرقمي التفاعلي المطور (Hologram Molar) -->
         <div class="digital-tooth-container elements-3d">
             <svg class="tooth-svg" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                    <!-- تدرج لوني يعطي إحساس الهولوجرام -->
                     <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                         <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.8" />
                         <stop offset="100%" stop-color="#0077ff" stop-opacity="0.1" />
                     </linearGradient>
                 </defs>
-                <!-- الهيكل الخارجي للسن -->
                 <path d="M28 20 C38 8, 62 8, 72 20 C88 38, 92 60, 80 80 C74 90, 68 110, 58 110 C52 110, 50 90, 50 90 C50 90, 48 110, 42 110 C32 110, 26 90, 20 80 C8 60, 12 38, 28 20 Z" 
                       fill="url(#glowGrad)" stroke="#00e5ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <!-- خطوط هندسية داخلية توحي بالتكنولوجيا والتشريح الرقمي -->
                 <path d="M50 22 L50 85 M22 45 L78 45 M32 75 L68 75" stroke="rgba(0, 229, 255, 0.6)" stroke-width="1" stroke-dasharray="3 4"/>
                 <path d="M35 30 L50 45 L65 30" stroke="rgba(0, 229, 255, 0.4)" stroke-width="1"/>
-                <!-- نقاط مضيئة على المفاصل -->
                 <circle cx="50" cy="45" r="3" fill="#fff" filter="blur(1px)"/>
                 <circle cx="32" cy="75" r="2" fill="#fff"/>
                 <circle cx="68" cy="75" r="2" fill="#fff"/>
@@ -418,7 +540,7 @@
     </section>
 
     <!-- قسم الاقتباسات العالمية -->
-    <section id="quotes" class="content-section reveal" style="padding-bottom: 150px;">
+    <section id="quotes" class="content-section reveal" style="padding-bottom: 100px;">
         <h2 class="section-title">إرث الحكماء</h2>
         <div class="grid-container">
             
@@ -445,6 +567,41 @@
 
         </div>
     </section>
+
+    <!-- الفوتر الفخم -->
+    <footer class="lux-footer">
+        <!-- زر العودة للأعلى -->
+        <a href="#top" class="back-to-top" title="العودة للقمة">↑</a>
+
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h2>هديل أحمد بله</h2>
+                <p>مساحة رقمية مبتكرة تجمع بين دقة الطب والفن الرقمي. حيث تصنع الابتسامة بشغف وتكتمل برؤية مستقبلية نحو آفاق لا حدود لها.</p>
+            </div>
+
+            <div class="footer-links">
+                <h3>رحلة الموقع</h3>
+                <ul>
+                    <li><a href="#vision">فلسفة الابتسامة</a></li>
+                    <li><a href="#insights">الآفاق الطبية الرقمية</a></li>
+                    <li><a href="#quotes">إرث وحكمة الأطباء</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h3>ملفات وموسوعات</h3>
+                <ul>
+                    <li><a href="#">موسوعة 100 حقيقة في طب الأسنان</a></li>
+                    <li><a href="#">مشاريع الدفعة الثامنة (Batch 8)</a></li>
+                    <li><a href="#">المجلة الرقمية الطبية</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>تم التصميم بشغف نحو المستقبل | جميع الحقوق محفوظة <span>&copy; 2026</span></p>
+        </div>
+    </footer>
 
     <!-- سكريبت التفاعل، الجسيمات، والظهور عند التمرير -->
     <script>
@@ -517,14 +674,14 @@
             for (let i = 0; i < reveals.length; i++) {
                 const windowHeight = window.innerHeight;
                 const elementTop = reveals[i].getBoundingClientRect().top;
-                const elementVisible = 150; // المسافة قبل أن يظهر العنصر
+                const elementVisible = 150; 
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add('active');
                 }
             }
         }
         window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll(); // تشغيل مرة واحدة عند فتح الصفحة
+        revealOnScroll(); 
     </script>
 
 </body>
