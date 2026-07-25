@@ -4,111 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مؤسسة هديل أحمد بله | Batch 8</title>
+    <meta name="description" content="مؤسسة هديل أحمد بله — رحلة رقمية تفاعلية في عالم طب الأسنان، تجمع بين المعرفة الطبية الموثوقة وتصميم هولوغرامي مستقبلي يحتفي بفن الابتسامة.">
+    <meta property="og:title" content="مؤسسة هديل أحمد بله | طب الأسنان">
+    <meta property="og:description" content="رحلة رقمية تفاعلية في عالم طب الأسنان، بروح هولوغرامية مستقبلية.">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="style.css">
+
     <style>
-        :root {
-            --primary-glow: #00e5ff;
-            --secondary-glow: #0077ff;
-            --bg-deep: #010613;
-            --bg-ocean: #04142c;
-            --text-light: #e2e8f0;
-            --text-muted: #94a3b8;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(0, 229, 255, 0.15);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: linear-gradient(to top, var(--bg-deep), var(--bg-ocean));
-            color: var(--text-light);
-            overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* خلفية الجسيمات السحرية */
-        #magicCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* شريط التنقل */
-        header {
-            padding: 25px 40px;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(to bottom, rgba(1, 6, 19, 0.95), transparent);
-            backdrop-filter: blur(5px);
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            opacity: 0;
-            animation: fadeInDown 1.5s ease forwards 0.5s;
-        }
-
-        .brand h2 {
-            font-size: 20px;
-            font-weight: 900;
-            color: #fff;
-            letter-spacing: 1px;
-        }
-
-        .batch {
-            font-size: 10px;
-            border: 1px solid var(--primary-glow);
-            color: var(--primary-glow);
-            padding: 3px 10px;
-            border-radius: 20px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-            opacity: 0;
-            animation: fadeInDown 1.5s ease forwards 1s;
-        }
-
-        .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 400;
-            transition: color 0.4s ease, text-shadow 0.4s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-glow);
-            text-shadow: 0 0 15px var(--primary-glow);
-        }
-
-        /* الواجهة الرئيسية */
+        /* ---------------- الواجهة الرئيسية ---------------- */
         .hero {
             height: 100vh;
             display: flex;
@@ -120,7 +25,6 @@
             padding: 0 20px;
         }
 
-        /* حاوية السن الرقمي المطور */
         .digital-tooth-container {
             position: relative;
             width: 220px;
@@ -175,34 +79,31 @@
             font-weight: 300;
         }
 
-        /* ---------------- أقسام المحتوى ---------------- */
-        .content-section {
-            padding: 100px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 10;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 36px;
-            font-weight: 900;
-            color: #fff;
-            margin-bottom: 60px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
+        .scroll-cue {
             position: absolute;
-            bottom: -15px;
+            bottom: 36px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: var(--primary-glow);
-            box-shadow: 0 0 10px var(--primary-glow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 12px;
+            opacity: 0;
+            animation: fadeInUp 2s ease forwards 2.3s;
+        }
+        .scroll-cue span.line {
+            width: 1px;
+            height: 34px;
+            background: linear-gradient(to bottom, var(--primary-glow), transparent);
+            animation: scrollLine 2s ease-in-out infinite;
+        }
+        @keyframes scrollLine {
+            0% { transform: scaleY(0); transform-origin: top; }
+            50% { transform: scaleY(1); transform-origin: top; }
+            51% { transform-origin: bottom; }
+            100% { transform: scaleY(0); transform-origin: bottom; }
         }
 
         /* قسم رؤية هديل */
@@ -219,7 +120,7 @@
         }
 
         .vision-box::before {
-            content: '“';
+            content: '"';
             position: absolute;
             top: -20px;
             right: 40px;
@@ -243,193 +144,6 @@
             font-weight: 700;
         }
 
-        /* شبكة المقالات والاقتباسات */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 20px;
-            padding: 40px 30px;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .glass-card:hover {
-            border-color: var(--primary-glow);
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 229, 255, 0.15);
-        }
-
-        .glass-card .icon {
-            font-size: 40px;
-            margin-bottom: 20px;
-            color: var(--primary-glow);
-            display: inline-block;
-        }
-
-        .glass-card h3 {
-            font-size: 22px;
-            color: #fff;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .glass-card p {
-            color: var(--text-muted);
-            font-size: 15px;
-            line-height: 1.7;
-        }
-
-        .global-quote {
-            border-right: 4px solid var(--primary-glow);
-            padding-right: 15px;
-            font-style: italic;
-            color: #e2e8f0 !important;
-        }
-
-        /* فئة تأثير الظهور عند التمرير */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ---------------- الفوتر الفخم المضاف حديثاً ---------------- */
-        .lux-footer {
-            margin-top: auto;
-            position: relative;
-            background: linear-gradient(to top, #00040a, transparent);
-            padding: 80px 20px 20px;
-            border-top: 1px solid rgba(0, 229, 255, 0.1);
-            z-index: 10;
-        }
-
-        /* الخط العلوي المضيء للفوتر */
-        .lux-footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 70%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--primary-glow), transparent);
-            box-shadow: 0 0 20px var(--primary-glow), 0 0 40px var(--secondary-glow);
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            padding-bottom: 50px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .footer-brand h2 {
-            font-size: 24px;
-            font-weight: 900;
-            color: #fff;
-            margin-bottom: 15px;
-        }
-
-        .footer-brand p {
-            color: var(--text-muted);
-            font-size: 14px;
-            line-height: 1.8;
-            max-width: 300px;
-        }
-
-        .footer-links h3 {
-            font-size: 18px;
-            color: var(--primary-glow);
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links ul li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links ul li a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-
-        .footer-links ul li a:hover {
-            color: #fff;
-            transform: translateX(-5px); /* حركة خفيفة لليسار عند التأشير */
-            text-shadow: 0 0 10px var(--primary-glow);
-        }
-
-        /* زر العودة للأعلى */
-        .back-to-top {
-            position: absolute;
-            right: 40px;
-            top: -25px;
-            width: 50px;
-            height: 50px;
-            background: var(--bg-deep);
-            border: 1px solid var(--primary-glow);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--primary-glow);
-            text-decoration: none;
-            font-size: 24px;
-            box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 20;
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-10px) scale(1.1);
-            background: var(--primary-glow);
-            color: var(--bg-deep);
-            box-shadow: 0 10px 25px rgba(0, 229, 255, 0.6);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 25px;
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .footer-bottom span {
-            color: var(--primary-glow);
-            font-weight: 700;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.7; text-shadow: 0 0 5px transparent; }
-            50% { opacity: 1; text-shadow: 0 0 15px var(--primary-glow); }
-            100% { opacity: 0.7; text-shadow: 0 0 5px transparent; }
-        }
-
         /* الحركات الانتقالية */
         @keyframes riseFromTheDeep {
             0% { opacity: 0; transform: translateY(150px) scale(0.8); filter: blur(10px); }
@@ -441,39 +155,193 @@
             50% { transform: translateY(-25px); }
         }
 
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
+        /* ================= عالم طب الأسنان — القسم المداري ثلاثي الأبعاد ================= */
+        .world-intro {
+            text-align: center;
+            max-width: 640px;
+            margin: -30px auto 0;
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.9;
         }
 
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .orbit-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 34px;
+            margin-top: 60px;
+        }
+
+        .orbit-scene {
+            width: 100%;
+            max-width: 560px;
+            height: 400px;
+            position: relative;
+            perspective: 1300px;
+            transform-style: preserve-3d;
+        }
+
+        .orbit-hub {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 92px;
+            height: 110px;
+            transform: translate(-50%, -50%);
+            animation: hubPulse 4s ease-in-out infinite;
+        }
+
+        .hub-svg { width: 100%; height: 100%; filter: drop-shadow(0 0 18px rgba(0, 229, 255, 0.55)); }
+
+        @keyframes hubPulse {
+            0%, 100% { filter: drop-shadow(0 0 14px rgba(0,229,255,.5)); }
+            50% { filter: drop-shadow(0 0 30px rgba(0,229,255,.9)); }
+        }
+
+        .orbit-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+            transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+            --radius: 225px;
+        }
+
+        .orbit-item {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 116px;
+            height: 116px;
+            transform: translate(-50%, -50%) rotateY(calc(45deg * var(--i))) translateZ(var(--radius));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--glass-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 22px;
+            backdrop-filter: blur(8px);
+            color: var(--text-light);
+            padding: 10px;
+            appearance: none;
+            transition: border-color .35s ease, box-shadow .35s ease, background .35s ease;
+        }
+
+        .orbit-item .emoji {
+            font-size: 30px;
+            filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.45));
+        }
+
+        .orbit-item .label {
+            font-size: 11px;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .orbit-item:hover,
+        .orbit-item:focus-visible,
+        .orbit-item.is-active {
+            border-color: var(--primary-glow);
+            background: rgba(0, 229, 255, 0.09);
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+        }
+
+        .orbit-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .orbit-arrow {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-light);
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 13px;
+            transition: all .3s ease;
+        }
+        .orbit-arrow:hover, .orbit-arrow:focus-visible {
+            border-color: var(--primary-glow);
+            color: var(--primary-glow);
+            box-shadow: 0 0 15px rgba(0,229,255,.25);
+        }
+
+        .orbit-dots { display: flex; gap: 8px; }
+        .orbit-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            border: none; padding: 0;
+            transition: all .3s ease;
+        }
+        .orbit-dot.is-active {
+            background: var(--primary-glow);
+            box-shadow: 0 0 10px var(--primary-glow);
+            transform: scale(1.3);
+        }
+
+        .orbit-panel {
+            text-align: center;
+            max-width: 560px;
+            width: 100%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px 35px;
+            backdrop-filter: blur(12px);
+            min-height: 118px;
+        }
+
+        .orbit-panel-title {
+            color: var(--primary-glow);
+            font-size: 20px;
+            margin-bottom: 12px;
+            font-weight: 900;
+        }
+
+        .orbit-panel-desc {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.8;
         }
 
         @media (max-width: 768px) {
-            header { padding: 20px; flex-direction: column; gap: 15px; }
-            .nav-links { gap: 20px; justify-content: center; }
             .digital-tooth-container { width: 150px; height: 200px; }
             .vision-text { font-size: 22px; }
-            .back-to-top { right: 20px; top: -20px; width: 40px; height: 40px; font-size: 20px; }
+
+            .orbit-scene { height: 300px; }
+            .orbit-ring { --radius: 118px; }
+            .orbit-item { width: 82px; height: 82px; border-radius: 16px; gap: 4px; }
+            .orbit-item .emoji { font-size: 22px; }
+            .orbit-item .label { font-size: 8.5px; }
+            .orbit-hub { width: 62px; height: 74px; }
+            .orbit-panel { padding: 24px 22px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- سماء الإبداع وأعماق المحيط (الجسيمات) -->
     <canvas id="magicCanvas"></canvas>
 
     <!-- شريط التنقل -->
     <header>
-        <a href="#" class="brand">
+        <a href="#top" class="brand">
             <h2>هديل أحمد بله</h2>
             <span class="batch">Batch 8</span>
         </a>
         <ul class="nav-links">
             <li><a href="#vision">الرؤية</a></li>
+            <li><a href="#world">عالم الأسنان</a></li>
             <li><a href="#insights">الموسوعة</a></li>
             <li><a href="#quotes">إرث الطب</a></li>
+            <li><a href="news.html">الأخبار</a></li>
         </ul>
     </header>
 
@@ -502,6 +370,11 @@
             <h1>طب الأسنان ليس مجرد علم،<br>بل هو <strong>فن يعيد صياغة الحياة</strong></h1>
             <p>هنا تتلاقى دقة الطب مع أفق الإبداع اللامحدود. رحلة في أعماق المعرفة الطبية، ترتفع بنا نحو آفاق جديدة في عالم تجميل وصحة الأسنان، برؤية تتجاوز المألوف.</p>
         </div>
+
+        <div class="scroll-cue" aria-hidden="true">
+            <span>مرّر للأسفل</span>
+            <span class="line"></span>
+        </div>
     </section>
 
     <!-- قسم رؤية هديل -->
@@ -513,11 +386,72 @@
         </div>
     </section>
 
+    <!-- قسم عالم طب الأسنان (مدار ثلاثي الأبعاد) -->
+    <section id="world" class="content-section reveal">
+        <h2 class="section-title">عالم طب الأسنان</h2>
+        <p class="world-intro">كوكبة من التخصصات تدور في مدارٍ واحد، كل واحدة منها تحمل جزءاً من سرّ الابتسامة المثالية. اضغط على أي تخصص — أو استخدم الأزرار — لتكتشف عالمه.</p>
+
+        <div class="orbit-wrap">
+            <div class="orbit-scene">
+                <div class="orbit-hub" aria-hidden="true">
+                    <svg viewBox="0 0 100 120" class="hub-svg" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="hubGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.9"/>
+                                <stop offset="100%" stop-color="#0077ff" stop-opacity="0.15"/>
+                            </linearGradient>
+                        </defs>
+                        <path d="M28 20 C38 8, 62 8, 72 20 C88 38, 92 60, 80 80 C74 90, 68 110, 58 110 C52 110, 50 90, 50 90 C50 90, 48 110, 42 110 C32 110, 26 90, 20 80 C8 60, 12 38, 28 20 Z"
+                              fill="url(#hubGrad)" stroke="#00e5ff" stroke-width="2"/>
+                    </svg>
+                </div>
+
+                <div class="orbit-ring" id="orbitRing">
+                    <button type="button" class="orbit-item is-active" style="--i:0" data-title="تقويم الأسنان" data-desc="علاج تراص وترتيب الأسنان والفكين باستخدام التقويم الثابت أو الشفاف، لتحقيق ابتسامة متناسقة ووظيفة أفضل للمضغ.">
+                        <span class="emoji">😁</span><span class="label">تقويم الأسنان</span>
+                    </button>
+                    <button type="button" class="orbit-item" style="--i:1" data-title="طب أسنان الأطفال" data-desc="رعاية متخصصة للأسنان اللبنية والدائمة لدى الأطفال، تجمع بين الوقاية والعلاج بأسلوب لطيف يبني علاقة إيجابية مع طبيب الأسنان.">
+                        <span class="emoji">👶</span><span class="label">طب أسنان الأطفال</span>
+                    </button>
+                    <button type="button" class="orbit-item" style="--i:2" data-title="زراعة الأسنان" data-desc="تعويض الأسنان المفقودة بجذور تيتانيوم تندمج مع عظم الفك، لتُركّب عليها تيجان تحاكي الأسنان الطبيعية شكلاً ووظيفة.">
+                        <span class="emoji">🦷</span><span class="label">زراعة الأسنان</span>
+                    </button>
+                    <button type="button" class="orbit-item" style="--i:3" data-title="علاج الجذور" data-desc="علاج التهابات وأمراض لُبّ السن للحفاظ على السن الطبيعي بدلاً من خلعه، من خلال تنظيف القنوات الجذرية وحشوها.">
+                        <span class="emoji">🔬</span><span class="label">علاج الجذور</span>
+                    </button>
+                    <button type="button" class="orbit-item" style="--i:4" data-title="جراحة الفم والفكين" data-desc="التدخلات الجراحية المتعلقة بالفك والوجه والفم، من خلع الأسنان المعقد إلى تصحيح تشوهات الفكين.">
+                        <span class="emoji">⚕️</span><span class="label">جراحة الفم والفكين</span>
+                    </button>
+                    <button type="button" class="orbit-item" style="--i:5" data-title="تجميل وتبييض الأسنان" data-desc="تحسين مظهر الابتسامة عبر التبييض والقشور الخزفية والتصميم الرقمي للابتسامة (DSD) بما يناسب ملامح الوجه.">
+                        <span class="emoji">✨</span><span class="label">تجميل وتبييض الأسنان</span>
+                    </button>
+                    <button type="button" class="orbit-item" style="--i:6" data-title="التركيبات السنية" data-desc="تعويض الأسنان المفقودة أو التالفة بتيجان وجسور وأطقم متحركة أو ثابتة تعيد الوظيفة والجمال.">
+                        <span class="emoji">🌉</span><span class="label">التركيبات السنية</span>
+                    </button>
+                    <button type="button" class="orbit-item" style="--i:7" data-title="طب اللثة والوقاية" data-desc="الحفاظ على صحة اللثة والأنسجة الداعمة للأسنان، ومنع تطور الأمراض عبر التنظيف الدوري والتوعية الوقائية.">
+                        <span class="emoji">🛡️</span><span class="label">طب اللثة والوقاية</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="orbit-controls">
+                <button type="button" class="orbit-arrow" id="orbitPrev">السابق</button>
+                <div class="orbit-dots" id="orbitDots"></div>
+                <button type="button" class="orbit-arrow" id="orbitNext">التالي</button>
+            </div>
+
+            <div class="orbit-panel">
+                <h3 class="orbit-panel-title" id="orbitPanelTitle">تقويم الأسنان</h3>
+                <p class="orbit-panel-desc" id="orbitPanelDesc">علاج تراص وترتيب الأسنان والفكين باستخدام التقويم الثابت أو الشفاف، لتحقيق ابتسامة متناسقة ووظيفة أفضل للمضغ.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- قسم المقالات والموسوعة الطبية -->
     <section id="insights" class="content-section reveal">
         <h2 class="section-title">آفاق المعرفة الطبية</h2>
         <div class="grid-container">
-            
+
             <div class="glass-card">
                 <div class="icon">🌌</div>
                 <h3>هندسة الابتسامة الرقمية (DSD)</h3>
@@ -536,6 +470,18 @@
                 <p>تطور تقنيات اندماج التيتانيوم مع عظم الفك جعل من استعاضة الأسنان المفقودة عملية دقيقة تدوم مدى الحياة، لتعيد للمريض ثقته وقدرته على ممارسة حياته الطبيعية.</p>
             </div>
 
+            <div class="glass-card">
+                <div class="icon">🥗</div>
+                <h3>التغذية وصحة الفم</h3>
+                <p>ما نأكله يرسم ملامح ابتسامتنا. الكالسيوم والفوسفور يقويان طبقة المينا، بينما السكريات المتكررة تفتح الباب أمام التسوس. التغذية المتوازنة هي خط الدفاع الأول قبل أي علاج.</p>
+            </div>
+
+            <div class="glass-card">
+                <div class="icon">🤖</div>
+                <h3>طب الأسنان الرقمي والذكاء الاصطناعي</h3>
+                <p>المسح ثلاثي الأبعاد داخل الفم، والطباعة الرقمية للتيجان، وخوارزميات تحليل الأشعة، تعيد تشكيل غرفة العلاج لتصبح أكثر دقة وأقل توتراً للمريض.</p>
+            </div>
+
         </div>
     </section>
 
@@ -543,7 +489,7 @@
     <section id="quotes" class="content-section reveal" style="padding-bottom: 100px;">
         <h2 class="section-title">إرث الحكماء</h2>
         <div class="grid-container">
-            
+
             <div class="glass-card">
                 <div class="icon">🖋️</div>
                 <p class="global-quote">"كل سن في رأس الإنسان أثمن من أندر ماسة في العالم."</p>
@@ -570,7 +516,6 @@
 
     <!-- الفوتر الفخم -->
     <footer class="lux-footer">
-        <!-- زر العودة للأعلى -->
         <a href="#top" class="back-to-top" title="العودة للقمة">↑</a>
 
         <div class="footer-content">
@@ -580,20 +525,19 @@
             </div>
 
             <div class="footer-links">
-                <h3>رحلة الموقع</h3>
+                <h3>استكشف</h3>
                 <ul>
                     <li><a href="#vision">فلسفة الابتسامة</a></li>
+                    <li><a href="#world">عالم التخصصات</a></li>
                     <li><a href="#insights">الآفاق الطبية الرقمية</a></li>
-                    <li><a href="#quotes">إرث وحكمة الأطباء</a></li>
                 </ul>
             </div>
 
             <div class="footer-links">
-                <h3>ملفات وموسوعات</h3>
+                <h3>تواصل مع المحتوى</h3>
                 <ul>
-                    <li><a href="#">موسوعة 100 حقيقة في طب الأسنان</a></li>
-                    <li><a href="#">مشاريع الدفعة الثامنة (Batch 8)</a></li>
-                    <li><a href="#">المجلة الرقمية الطبية</a></li>
+                    <li><a href="#quotes">إرث وحكمة الأطباء</a></li>
+                    <li><a href="news.html">نبض الأخبار</a></li>
                 </ul>
             </div>
         </div>
@@ -603,85 +547,87 @@
         </div>
     </footer>
 
-    <!-- سكريبت التفاعل، الجسيمات، والظهور عند التمرير -->
+    <script src="shared.js"></script>
     <script>
-        // 1. التفاعل ثلاثي الأبعاد مع السن الرقمي
-        const tooth = document.querySelector('.elements-3d');
-        document.addEventListener('mousemove', (e) => {
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
-            tooth.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-        });
+        // التفاعل ثلاثي الأبعاد مع السن الرقمي في الواجهة الرئيسية
+        (function () {
+            var tooth = document.querySelector('.elements-3d');
+            if (!tooth) return;
+            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduceMotion) return;
+            document.addEventListener('mousemove', function (e) {
+                var xAxis = (window.innerWidth / 2 - e.pageX) / 40;
+                var yAxis = (window.innerHeight / 2 - e.pageY) / 40;
+                tooth.style.transform = 'rotateY(' + xAxis + 'deg) rotateX(' + yAxis + 'deg)';
+            });
+        })();
 
-        // 2. نظام الجسيمات (فقاعات أعماق المحيط)
-        const canvas = document.getElementById('magicCanvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        let particlesArray = [];
+        // مدار عالم طب الأسنان ثلاثي الأبعاد
+        (function () {
+            var ring = document.getElementById('orbitRing');
+            var items = document.querySelectorAll('.orbit-item');
+            var panelTitle = document.getElementById('orbitPanelTitle');
+            var panelDesc = document.getElementById('orbitPanelDesc');
+            var dotsWrap = document.getElementById('orbitDots');
+            var prevBtn = document.getElementById('orbitPrev');
+            var nextBtn = document.getElementById('orbitNext');
+            var scene = document.querySelector('.orbit-scene');
+            if (!ring || !items.length) return;
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = canvas.height + Math.random() * 100;
-                this.size = Math.random() * 2.5 + 0.5;
-                this.speedY = Math.random() * 1.5 + 0.5;
-                this.opacity = Math.random() * 0.5 + 0.1;
+            var N = items.length;
+            var current = 0;
+            var timer = null;
+            var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            items.forEach(function (item, i) {
+                var dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'orbit-dot';
+                dot.setAttribute('aria-label', item.getAttribute('data-title'));
+                dot.addEventListener('click', function () { goTo(i); });
+                dotsWrap.appendChild(dot);
+            });
+            var dots = document.querySelectorAll('.orbit-dot');
+
+            function render() {
+                ring.style.transform = 'rotateY(' + (-45 * current) + 'deg)';
+                items.forEach(function (item, i) {
+                    item.classList.toggle('is-active', i === current);
+                });
+                dots.forEach(function (d, i) {
+                    d.classList.toggle('is-active', i === current);
+                });
+                panelTitle.textContent = items[current].getAttribute('data-title');
+                panelDesc.textContent = items[current].getAttribute('data-desc');
             }
-            update() {
-                this.y -= this.speedY;
-                if (this.y < 0) {
-                    this.y = canvas.height;
-                    this.x = Math.random() * canvas.width;
-                }
-            }
-            draw() {
-                ctx.fillStyle = `rgba(0, 229, 255, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
 
-        function initParticles() {
-            particlesArray = [];
-            for (let i = 0; i < 150; i++) {
-                particlesArray.push(new Particle());
+            function goTo(i) {
+                current = ((i % N) + N) % N;
+                render();
             }
-        }
 
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
+            items.forEach(function (item, i) {
+                item.addEventListener('click', function () { goTo(i); });
+            });
+
+            prevBtn.addEventListener('click', function () { goTo(current - 1); });
+            nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+            function startAuto() {
+                if (reduceMotion) return;
+                stopAuto();
+                timer = setInterval(function () { goTo(current + 1); }, 4500);
             }
-            requestAnimationFrame(animateParticles);
-        }
+            function stopAuto() { if (timer) clearInterval(timer); }
 
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            initParticles();
-        });
-
-        initParticles();
-        animateParticles();
-
-        // 3. تأثير الظهور عند التمرير للأسفل (Scroll Reveal)
-        const reveals = document.querySelectorAll('.reveal');
-        function revealOnScroll() {
-            for (let i = 0; i < reveals.length; i++) {
-                const windowHeight = window.innerHeight;
-                const elementTop = reveals[i].getBoundingClientRect().top;
-                const elementVisible = 150; 
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add('active');
-                }
+            if (scene) {
+                scene.addEventListener('mouseenter', stopAuto);
+                scene.addEventListener('mouseleave', startAuto);
             }
-        }
-        window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll(); 
+
+            render();
+            startAuto();
+        })();
     </script>
 
 </body>
