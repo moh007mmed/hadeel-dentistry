@@ -1,0 +1,376 @@
+/* =========================================================
+   مؤسسة هديل أحمد بله — التنسيقات المشتركة بين كل صفحات الموقع
+   (المتغيرات، الهيدر، الفوتر، البطاقات الزجاجية، حركة الظهور)
+   ========================================================= */
+
+:root {
+    --primary-glow: #00e5ff;
+    --secondary-glow: #0077ff;
+    --bg-deep: #010613;
+    --bg-ocean: #04142c;
+    --text-light: #e2e8f0;
+    --text-muted: #94a3b8;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(0, 229, 255, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cairo', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background: linear-gradient(to top, var(--bg-deep), var(--bg-ocean));
+    color: var(--text-light);
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a { color: inherit; }
+button { cursor: pointer; }
+
+/* وضوح التركيز عبر لوحة المفاتيح لكل عناصر الموقع */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--primary-glow);
+    outline-offset: 3px;
+    border-radius: 6px;
+}
+
+/* خلفية الجسيمات السحرية (يُرسم محتواها عبر shared.js) */
+#magicCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* ---------------- شريط التنقل ---------------- */
+header {
+    padding: 25px 40px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(1, 6, 19, 0.95), transparent);
+    backdrop-filter: blur(5px);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    opacity: 0;
+    animation: fadeInDown 1.5s ease forwards 0.5s;
+}
+
+.brand h2 {
+    font-size: 20px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.batch {
+    font-size: 10px;
+    border: 1px solid var(--primary-glow);
+    color: var(--primary-glow);
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    list-style: none;
+    opacity: 0;
+    animation: fadeInDown 1.5s ease forwards 1s;
+}
+
+.nav-links a {
+    position: relative;
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    transition: color 0.4s ease, text-shadow 0.4s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary-glow);
+    text-shadow: 0 0 15px var(--primary-glow);
+}
+
+.nav-links a.active {
+    color: var(--primary-glow);
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: -8px;
+    height: 2px;
+    background: var(--primary-glow);
+    box-shadow: 0 0 8px var(--primary-glow);
+}
+
+/* ---------------- أقسام المحتوى ---------------- */
+.content-section {
+    padding: 100px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 60px;
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: var(--primary-glow);
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+/* شبكة البطاقات الزجاجية */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 40px 30px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card:hover {
+    border-color: var(--primary-glow);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 229, 255, 0.15);
+}
+
+.glass-card .icon {
+    font-size: 40px;
+    margin-bottom: 20px;
+    color: var(--primary-glow);
+    display: inline-block;
+}
+
+.glass-card h3 {
+    font-size: 22px;
+    color: #fff;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.glass-card p {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.global-quote {
+    border-right: 4px solid var(--primary-glow);
+    padding-right: 15px;
+    font-style: italic;
+    color: #e2e8f0 !important;
+}
+
+/* فئة تأثير الظهور عند التمرير */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ---------------- الفوتر الفخم ---------------- */
+.lux-footer {
+    margin-top: auto;
+    position: relative;
+    background: linear-gradient(to top, #00040a, transparent);
+    padding: 80px 20px 20px;
+    border-top: 1px solid rgba(0, 229, 255, 0.1);
+    z-index: 10;
+}
+
+.lux-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary-glow), transparent);
+    box-shadow: 0 0 20px var(--primary-glow), 0 0 40px var(--secondary-glow);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-brand h2 {
+    font-size: 24px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.footer-brand p {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 300px;
+}
+
+.footer-links h3 {
+    font-size: 18px;
+    color: var(--primary-glow);
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links ul li {
+    margin-bottom: 12px;
+}
+
+.footer-links ul li a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.footer-links ul li a:hover {
+    color: #fff;
+    transform: translateX(-5px);
+    text-shadow: 0 0 10px var(--primary-glow);
+}
+
+.back-to-top {
+    position: absolute;
+    right: 40px;
+    top: -25px;
+    width: 50px;
+    height: 50px;
+    background: var(--bg-deep);
+    border: 1px solid var(--primary-glow);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary-glow);
+    text-decoration: none;
+    font-size: 24px;
+    box-shadow: 0 0 15px rgba(0, 229, 255, 0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 20;
+}
+
+.back-to-top:hover {
+    transform: translateY(-10px) scale(1.1);
+    background: var(--primary-glow);
+    color: var(--bg-deep);
+    box-shadow: 0 10px 25px rgba(0, 229, 255, 0.6);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 25px;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.footer-bottom span {
+    color: var(--primary-glow);
+    font-weight: 700;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.7; text-shadow: 0 0 5px transparent; }
+    50% { opacity: 1; text-shadow: 0 0 15px var(--primary-glow); }
+    100% { opacity: 0.7; text-shadow: 0 0 5px transparent; }
+}
+
+@keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    header { padding: 20px; flex-direction: column; gap: 15px; }
+    .nav-links { gap: 18px; justify-content: center; }
+    .back-to-top { right: 20px; top: -20px; width: 40px; height: 40px; font-size: 20px; }
+    .content-section { padding: 70px 20px; }
+    .section-title { font-size: 28px; }
+}
+
+/* احترام تفضيل تقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
