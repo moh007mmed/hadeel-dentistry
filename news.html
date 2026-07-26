@@ -175,8 +175,17 @@
         @keyframes shimmer { to { background-position-x: -200%; } }
 
         /* ---------------- حالة الفراغ / الخطأ ---------------- */
-        .empty-state { grid-column: 1 / -1; text-align: center; padding: 70px 20px; color: var(--text-muted); }
-        .empty-state p { margin-bottom: 22px; font-size: 15px; }
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 28px 24px;
+            color: var(--text-muted);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            margin-bottom: 4px;
+        }
+        .empty-state p { margin-bottom: 18px; font-size: 13.5px; line-height: 1.9; max-width: 640px; margin-left: auto; margin-right: auto; }
         .retry-btn {
             background: transparent;
             border: 1px solid var(--primary-glow);
@@ -276,10 +285,56 @@
                 { url: 'https://medicalxpress.com/rss-feed/dentistry/', name: 'Medical Xpress' }
             ];
 
-            /* وسطاء احتياطيون في حال تعذّر الوصول المباشر */
+            /* وسطاء احتياطيون في حال تعذّر الوصول المباشر — مرتّبون من الأكثر سخاءً في الحد الأقصى للطلبات */
             var PROXIES = [
+                function (u) { return 'https://corsfix.com/' + u; },
                 function (u) { return 'https://api.codetabs.com/v1/proxy/?quest=' + encodeURIComponent(u); },
+                function (u) { return 'https://cors.x2u.in/' + u; },
                 function (u) { return 'https://api.allorigins.win/raw?url=' + encodeURIComponent(u); }
+            ];
+
+            var FETCH_TIMEOUT_MS = 7000;
+
+            function fetchWithTimeout(url) {
+                var controller = new AbortController();
+                var timer = setTimeout(function () { controller.abort(); }, FETCH_TIMEOUT_MS);
+                return fetch(url, { signal: controller.signal }).finally(function () {
+                    clearTimeout(timer);
+                });
+            }
+
+            /* مصادر احتياطية دائمة تُعرض فقط إن تعذّر إحضار الأخبار الحيّة كلياً */
+            var FALLBACK_LINKS = [
+                {
+                    title: 'الصحة الفموية — منظمة الصحة العالمية',
+                    description: 'نظرة موثوقة من منظمة الصحة العالمية حول انتشار أمراض الفم والأسنان وأهم عوامل الوقاية عالمياً.',
+                    link: 'https://www.who.int/news-room/fact-sheets/detail/oral-health',
+                    source: 'WHO'
+                },
+                {
+                    title: 'مركز المعرفة الصحية الفموية',
+                    description: 'مرجع شامل لنصائح العناية اليومية بالأسنان واللثة، مدعوم من الجمعية الأمريكية لطب الأسنان.',
+                    link: 'https://www.mouthhealthy.org/',
+                    source: 'ADA MouthHealthy'
+                },
+                {
+                    title: 'التوصيات الرسمية للعناية بالأسنان',
+                    description: 'أهم الخطوات العملية الموصى بها طبياً للحفاظ على أسنان ولثة صحية على المدى الطويل.',
+                    link: 'https://www.mouthhealthy.org/oral-health-recommendations',
+                    source: 'ADA MouthHealthy'
+                },
+                {
+                    title: 'التعامل مع طوارئ الأسنان',
+                    description: 'خطوات أولية مهمة عند التعرض لكسر أو خلع أو ألم مفاجئ في الأسنان، قبل الوصول إلى الطبيب.',
+                    link: 'https://www.mouthhealthy.org/all-topics-a-z/dental-emergencies',
+                    source: 'ADA MouthHealthy'
+                },
+                {
+                    title: 'التغذية وصحة الأسنان',
+                    description: 'كيف ترتبط عاداتنا الغذائية اليومية بصحة المينا واللثة، ونصائح لنظام غذائي داعم لصحة الفم.',
+                    link: 'https://www.mouthhealthy.org/all-topics-a-z/diet-and-dental-health',
+                    source: 'ADA MouthHealthy'
+                }
             ];
 
             var grid = document.getElementById('newsGrid');
@@ -306,9 +361,9 @@
             }
 
             function fetchViaRss2Json(feed) {
-                return fetch('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feed.url))
+                return fetchWithTimeout('https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(feed.url))
                     .then(function (res) {
-                        if (!res.ok) throw new Error('rss2json http error');
+                        if (!res.ok) throw new Error('rss2json http error ' + res.status);
                         return res.json();
                     })
                     .then(function (data) {
@@ -327,13 +382,14 @@
             }
 
             function fetchViaRawProxy(feed, buildProxyUrl) {
-                return fetch(buildProxyUrl(feed.url))
+                return fetchWithTimeout(buildProxyUrl(feed.url))
                     .then(function (res) {
-                        if (!res.ok) throw new Error('proxy http error');
+                        if (!res.ok) throw new Error('proxy http error ' + res.status);
                         return res.text();
                     })
                     .then(function (text) {
                         var xml = new DOMParser().parseFromString(text, 'text/xml');
+                        if (xml.querySelector('parsererror')) throw new Error('xml parse error');
                         var nodes = Array.prototype.slice.call(xml.querySelectorAll('item'));
                         if (!nodes.length) throw new Error('no items in feed');
                         return nodes.map(function (node) {
@@ -358,11 +414,12 @@
                 try {
                     return await fetchViaRss2Json(feed);
                 } catch (e) {
+                    console.warn('[نبض طب الأسنان] تعذّر جلب "' + feed.name + '" عبر rss2json:', e);
                     for (var i = 0; i < PROXIES.length; i++) {
                         try {
                             return await fetchViaRawProxy(feed, PROXIES[i]);
                         } catch (e2) {
-                            /* جرّب الوسيط التالي */
+                            console.warn('[نبض طب الأسنان] تعذّر جلب "' + feed.name + '" عبر الوسيط ' + (i + 1) + ':', e2);
                         }
                     }
                     return [];
@@ -484,20 +541,75 @@
                 grid.appendChild(frag);
             }
 
+            function buildFallbackCard(item, index) {
+                var card = document.createElement('article');
+                card.className = 'news-card reveal';
+
+                var img = document.createElement('div');
+                img.className = 'news-image';
+                var ph = document.createElement('span');
+                ph.className = 'news-placeholder-icon';
+                ph.textContent = PLACEHOLDER_EMOJIS[index % PLACEHOLDER_EMOJIS.length];
+                img.appendChild(ph);
+
+                var body = document.createElement('div');
+                body.className = 'news-content';
+
+                var badge = document.createElement('span');
+                badge.className = 'news-badge';
+                badge.textContent = item.source;
+                body.appendChild(badge);
+
+                var title = document.createElement('h3');
+                title.className = 'news-title';
+                title.setAttribute('dir', 'auto');
+                title.textContent = item.title;
+                body.appendChild(title);
+
+                var desc = document.createElement('p');
+                desc.className = 'news-desc';
+                desc.setAttribute('dir', 'auto');
+                desc.textContent = item.description;
+                body.appendChild(desc);
+
+                var link = document.createElement('a');
+                link.className = 'read-more';
+                link.href = item.link;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.textContent = 'زيارة المصدر';
+                body.appendChild(link);
+
+                card.appendChild(img);
+                card.appendChild(body);
+                return card;
+            }
+
             function showEmpty() {
                 grid.innerHTML = '';
-                var wrap = document.createElement('div');
-                wrap.className = 'empty-state';
+
+                var notice = document.createElement('div');
+                notice.className = 'empty-state';
                 var p = document.createElement('p');
-                p.textContent = 'تعذّر إحضار الأخبار في الوقت الحالي. قد تكون هناك مشكلة مؤقتة في الاتصال بمصادر الأخبار.';
+                p.textContent = 'تعذّر إحضار آخر الأخبار في هذه اللحظة. الأسباب الشائعة: فتح الملف مباشرة من الجهاز بدل رفعه على استضافة مثل GitHub Pages، أو مشكلة اتصال مؤقتة بمصادر الأخبار. لمزيد من التفاصيل التقنية افتحي "Console" ضمن أدوات المطوّر (F12). في الأثناء، إليك مصادر طبية موثوقة دائمة:';
                 var btn = document.createElement('button');
                 btn.type = 'button';
                 btn.className = 'retry-btn';
                 btn.textContent = 'إعادة المحاولة';
                 btn.addEventListener('click', function () { loadNews(true); });
-                wrap.appendChild(p);
-                wrap.appendChild(btn);
-                grid.appendChild(wrap);
+                notice.appendChild(p);
+                notice.appendChild(btn);
+                grid.appendChild(notice);
+
+                var frag = document.createDocumentFragment();
+                FALLBACK_LINKS.forEach(function (item, i) { frag.appendChild(buildFallbackCard(item, i)); });
+                grid.appendChild(frag);
+
+                var reveals = grid.querySelectorAll('.reveal');
+                reveals.forEach(function (el) {
+                    if (window.observeReveal) window.observeReveal(el);
+                    else el.classList.add('active');
+                });
             }
 
             function updateStatus() {
